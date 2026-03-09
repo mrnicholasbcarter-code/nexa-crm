@@ -4,6 +4,7 @@ import { useState } from "react";
 import { DealCard } from "./deal-card";
 import { Plus, MoreHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { NewDealDialog } from "./new-deal-dialog";
 
 const COLUMNS = [
   { id: "lead", title: "Leads" },
@@ -13,7 +14,7 @@ const COLUMNS = [
   { id: "lost", title: "Lost" },
 ];
 
-export const KanbanBoard = ({ initialDeals }: { initialDeals: any[] }) => {
+export const KanbanBoard = ({ initialDeals, workspaceId }: { initialDeals: any[], workspaceId: string }) => {
   const [deals, setDeals] = useState(initialDeals);
 
   return (
@@ -42,13 +43,7 @@ export const KanbanBoard = ({ initialDeals }: { initialDeals: any[] }) => {
                 <DealCard key={deal.id} deal={deal} />
               ))}
             
-            <Button 
-              variant="ghost" 
-              className="mt-2 w-full justify-start border border-dashed border-zinc-800 text-zinc-500 hover:border-zinc-700 hover:bg-zinc-900/50 hover:text-white"
-            >
-              <Plus className="mr-2 h-4 w-4" />
-              Add Deal
-            </Button>
+            <NewDealDialog workspaceId={workspaceId} />
           </div>
         </div>
       ))}
